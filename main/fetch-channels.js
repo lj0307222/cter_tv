@@ -217,31 +217,41 @@ async function loadProgress() {
 }
 
 /**
- * 加载输出文件（不存在则创建空结构）
+ * 初始化/加载输出文件（核心修改：主动创建空文件）
+ * 若文件不存在，先创建空的output.json，再返回基础结构
  */
-async function loadOutput() {
+async function initOutputFile() {
+  // 定义output的基础空结构
+  const emptyOutput = {
+    cctv_channels: { free_terrestrial_channel: [], donghua_region: [] },
+    provincial_satellite_channel: {
+      huabei_region: [], dongbei_region: [], huadong_region: [],
+      zhongnan_region: [], xinan_region: [], xibei_region: [],
+      characteristic_city_channel: []
+    },
+    digital_paid_channel: []
+  };
+
   try {
+    // 检查文件是否存在
     await fsPromises.access(outputJsonPath);
+    console.log(`✅ 找到已存在的output.json，加载文件内容`);
+    // 存在则读取并返回
     const content = await fsPromises.readFile(outputJsonPath, 'utf8');
-    return JSON.parse(content) || {
-      cctv_channels: { free_terrestrial_channel: [], donghua_region: [] },
-      provincial_satellite_channel: {
-        huabei_region: [], dongbei_region: [], huadong_region: [],
-        zhongnan_region: [], xinan_region: [], xibei_region: [],
-        characteristic_city_channel: []
-      },
-      digital_paid_channel: []
-    };
-  } catch (e) {
-    return {
-      cctv_channels: { free_terrestrial_channel: [], donghua_region: [] },
-      provincial_satellite_channel: {
-        huabei_region: [], dongbei_region: [], huadong_region: [],
-        zhongnan_region: [], xinan_region: [], xibei_region: [],
-        characteristic_city_channel: []
-      },
-      digital_paid_channel: []
-    };
+    return JSON.parse(content) || emptyOutput;
+  } catch (err) {
+    // 文件不存在，主动创建空文件
+    console.log(`ℹ️  未找到output.json，正在创建空文件: ${outputJsonPath}`);
+    try {
+      // 写入空结构到文件
+      await fsPromises.writeFile(outputJsonPath, JSON.stringify(emptyOutput, null, 2), 'utf8');
+      console.log(`✅ 空的output.json已成功创建`);
+      return emptyOutput;
+    } catch (writeErr) {
+      console.error(`❌ 创建output.json失败: ${writeErr.message}`);
+      console.error(`⚠️  检查路径权限: ${outputJsonPath}`);
+      throw writeErr; // 抛出错误终止流程，避免后续写入失败
+    }
   }
 }
 
@@ -249,7 +259,13 @@ async function loadOutput() {
  * 保存输出文件（去重追加）
  */
 async function saveOutput(output) {
-  await fsPromises.writeFile(outputJsonPath, JSON.stringify(output, null, 2), 'utf8');
+  try {
+    await fsPromises.writeFile(outputJsonPath, JSON.stringify(output, null, 2), 'utf8');
+    console.log(`✅ output.json已更新: ${outputJsonPath}`);
+  } catch (err) {
+    console.error(`❌ 保存output.json失败: ${err.message}`);
+    throw err;
+  }
 }
 
 /**
@@ -451,8 +467,8 @@ async function processBatchChannels(channelData, tempFiles) {
   const channelsToProcessKeys = pendingChannelKeys.slice(0, MAX_CHANNELS_PER_RUN);
   console.log(`🔄 本次处理频道数: ${channelsToProcessKeys.length}`);
 
-  // 5. 加载输出文件，准备批量更新
-  const output = await loadOutput();
+  // 5. 加载输出文件（确保文件已存在）
+  const output = await initOutputFile();
   let successAddedCount = 0; // 统计本次成功添加的频道数
 
   // 6. 循环处理本次的频道
@@ -498,7 +514,7 @@ async function processBatchChannels(channelData, tempFiles) {
   // 8. 批量保存更新后的输出文件
   if (successAddedCount > 0) {
     await saveOutput(output);
-    console.log(`✅ 本次共成功添加 ${successAddedCount} 个频道，输出文件已更新: ${outputJsonPath}`);
+    console.log(`✅ 本次共成功添加 ${successAddedCount} 个频道，输出文件已更新`);
   } else {
     console.log(`ℹ️  本次无新频道添加到输出文件`);
   }
@@ -511,14 +527,19 @@ async function processBatchChannels(channelData, tempFiles) {
 }
 
 /**
- * 主函数（核心修改：移除.completed检测，每次都完整执行）
+ * 主函数（核心修改：提前初始化output.json）
  */
 async function main() {
   try {
+    // 0. 【核心新增】提前初始化output.json（确保文件存在）
+    console.log('🔧 初始化output.json文件...');
+    await initOutputFile();
+
     // 1. 初始化目录（增加权限容错）
     try {
       if (!fs.existsSync(tempDir)) {
         await fsPromises.mkdir(tempDir, { recursive: true, mode: 0o755 });
+        console.log(`✅ 临时目录已创建: ${tempDir}`);
       }
     } catch (err) {
       console.error(`创建临时目录失败: ${err.message}`);
@@ -526,7 +547,7 @@ async function main() {
     }
 
     // 2. 读取频道配置
-    console.log('📄 读取频道配置文件...');
+    console.log('\n📄 读取频道配置文件...');
     let channelData;
     try {
       const channelContent = await fsPromises.readFile(channelJsonPath, 'utf8');
@@ -604,6 +625,7 @@ async function main() {
 
     // 8. 所有频道处理完成（仅提示，不创建标记/删除文件）
     console.log('\n🎉 所有频道处理完成！');
+    console.log(`ℹ️  output.json文件路径: ${outputJsonPath}`);
     console.log('ℹ️  下次运行将重新初始化进度并再次处理所有频道');
 
     console.log('\n' + '='.repeat(60));
