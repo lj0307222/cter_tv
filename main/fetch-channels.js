@@ -12,8 +12,7 @@ const tempDir = path.join(path.dirname(__dirname), 'temp_subscriptions');
 const progressJsonPath = path.join(path.dirname(__dirname), 'progress.json');
 const completedFlagPath = path.join(__dirname, '.completed'); // Actions完成标记文件
 
-// 配置常量
-const MAX_CHANNELS_PER_RUN = 5; // 每次运行最多处理5个频道
+// 配置常量 - 【修改】移除单次处理数量限制，改为处理所有待处理频道
 const MAX_RESPONSE_SIZE = 10 * 1024 * 1024; // 单个响应最大10MB
 const TEMP_FILE_FLAG = path.join(tempDir, '.download_complete'); // 标记临时文件已下载
 
@@ -247,13 +246,6 @@ async function loadOutput() {
 }
 
 /**
- * 保存输出文件（去重追加）
- */
-async function saveOutput(output) {
-  await fsPromises.writeFile(outputJsonPath, JSON.stringify(output, null, 2), 'utf8');
-}
-
-/**
  * 检查频道是否已存在于output中（去重）
  */
 function isChannelInOutput(output, channelName, channelData) {
@@ -429,7 +421,7 @@ async function downloadSubscriptions(subscriptionUrls) {
 }
 
 /**
- * 主函数（核心修复：批量处理5个频道）
+ * 主函数（核心修改：移除单次5个频道限制，处理所有待处理频道）
  */
 async function main() {
   try {
@@ -513,12 +505,12 @@ async function main() {
       console.log(`✅ 已创建进度配置文件: ${progressJsonPath}`);
     }
 
-    // 7. 获取待处理频道（未处理的块）
+    // 7. 获取待处理频道（未处理的所有频道）
     const pendingChannelKeys = Object.keys(progress).filter(key => !progress[key].processed);
     console.log(`\n📊 待处理频道总数: ${pendingChannelKeys.length}`);
     
-    // 核心修复：取前5个待处理频道（不足5个则取剩余全部）
-    const channelsToProcessKeys = pendingChannelKeys.slice(0, MAX_CHANNELS_PER_RUN);
+    // 【核心修改】处理所有待处理频道（移除5个数量限制）
+    const channelsToProcessKeys = pendingChannelKeys; // 取所有待处理频道
     console.log(`🔄 本次处理频道数: ${channelsToProcessKeys.length}`);
 
     // 8. 无待处理频道，清理并退出
@@ -540,7 +532,7 @@ async function main() {
     const output = await loadOutput();
     let successAddedCount = 0; // 统计本次成功添加的频道数
 
-    // 10. 循环处理本次的5个频道（核心修复）
+    // 10. 循环处理所有待处理频道
     for (const channelKey of channelsToProcessKeys) {
       const channelProgress = progress[channelKey];
       console.log('\n' + '-'.repeat(60));
@@ -572,11 +564,11 @@ async function main() {
         console.log(`⚠️ 【${channelKey}】已存在于输出文件，跳过`);
       }
 
-      // 从进度文件中删除当前处理完的频道块
-      delete progress[channelKey];
+      // 标记当前频道为已处理
+      progress[channelKey].processed = true;
       // 每次处理完一个频道就保存进度（防止崩溃丢失）
       await saveProgress(progress);
-      console.log(`✅ 【${channelKey}】已从进度文件中删除`);
+      console.log(`✅ 【${channelKey}】已标记为处理完成`);
     }
 
     // 11. 批量保存更新后的输出文件
@@ -587,13 +579,25 @@ async function main() {
       console.log(`\nℹ️  本次无新频道添加到输出文件`);
     }
 
-    // 12. 提示剩余频道
-    const remaining = Object.keys(progress).length;
-    console.log(`\n📋 剩余待处理频道数: ${remaining}`);
-    console.log('💡 下次运行将继续处理剩余频道');
+    // 12. 检查是否所有频道都处理完毕
+    const remaining = Object.keys(progress).filter(key => !progress[key].processed).length;
+    if (remaining === 0) {
+      console.log('\n🎉 所有频道处理完成！');
+      // 创建完成标记文件
+      await fsPromises.writeFile(completedFlagPath, JSON.stringify({ 
+        completed: true, 
+        time: new Date().toISOString() 
+      }), 'utf8').catch(err => console.warn(`创建完成标记失败: ${err.message}`));
+      // 删除进度文件和标记文件
+      await fsPromises.unlink(progressJsonPath).catch(() => {});
+      await fsPromises.unlink(TEMP_FILE_FLAG).catch(() => {});
+      console.log('✅ 已删除进度配置文件和下载标记');
+    } else {
+      console.log(`\n📋 剩余待处理频道数: ${remaining}`);
+    }
 
     console.log('\n' + '='.repeat(60));
-    console.log('✅ 本次批量处理完成！');
+    console.log('✅ 本次处理完成！');
 
   } catch (err) {
     console.error('\n❌ 程序执行错误:', err);
