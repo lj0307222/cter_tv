@@ -10,11 +10,11 @@
     {"id": 8, "url": "https://d.h6room.com/frjzb.txt"},
     {"id": 9, "url": "https://live.zbds.top/tv/iptv4.txt"},
     {"id": 10, "url": "https://raw.githubusercontent.com/YueChan/Live/refs/heads/main/GNTV.m3u"},
-    {"id": 8, "url": "https://raw.githubusercontent.com/skddyj/iptv/refs/heads/main/IPTV.m3u"},
-    {"id": 8, "url": "https://live.zbds.top/tv/iptv6.m3u"},
-    {"id": 8, "url": "https://raw.githubusercontent.com/iptv-org/iptv/refs/heads/master/streams/tw.m3u"},
-    {"id": 8, "url": "https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u"},
-    {"id": 8, "url": "https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv6.m3u"},
+    {"id": 11, "url": "https://raw.githubusercontent.com/skddyj/iptv/refs/heads/main/IPTV.m3u"},
+    {"id": 12, "url": "https://live.zbds.top/tv/iptv6.m3u"},
+    {"id": 13, "url": "https://raw.githubusercontent.com/iptv-org/iptv/refs/heads/master/streams/tw.m3u"},
+    {"id": 14, "url": "https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u"},
+    {"id": 15, "url": "https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv6.m3u"},
   ],
     "cctv_channels": {
     "free_terrestrial_channel": [
@@ -108,5 +108,6 @@
   },
 
 }
+
 
 
