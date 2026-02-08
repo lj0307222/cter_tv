@@ -14,9 +14,9 @@
     {"id": 12, "url": "https://live.zbds.top/tv/iptv6.m3u"},
     {"id": 13, "url": "https://raw.githubusercontent.com/iptv-org/iptv/refs/heads/master/streams/tw.m3u"},
     {"id": 14, "url": "https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u"},
-    {"id": 15, "url": "https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv6.m3u"},
+    {"id": 15, "url": "https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv6.m3u"}
   ],
-    "cctv_channels": {
+  "cctv_channels": {
     "free_terrestrial_channel": [
       {"name": ["CCTV-1", "cctv1", "cctv-1", "CCTV1", "CCTV-1综合", "CCTV1综合"]},
       {"name": ["CCTV-2", "cctv2", "cctv-2", "CCTV2", "CCTV-2财经", "CCTV2财经"]},
@@ -38,76 +38,37 @@
       {"name": ["CCTV-17", "cctv17", "cctv-17", "CCTV17", "CCTV-17农业", "CCTV17农业"]},
       {"name": ["CCTV-18", "cctv18", "cctv-18", "CCTV18", "CCTV-18超高清", "CCTV18超高清"]}
     ],
-    "donghua_region": [
-      {"name": ["金鹰卡通‌", "金鹰卡通"]},
-      {"name": ["卡酷动画", "卡酷少儿"]},
-      {"name": ["炫动卡通", "炫动少儿"]},
-      {"name": ["嘉佳卡通", "嘉佳少儿"]},
-      {"name": ["优漫卡通", "优漫少儿"]}
-    ],
-  }, 
+    "animation_channels": [
+      {"name": ["金鹰卡通"]},
+      {"name": ["卡酷少儿", "卡酷动画"]},
+      {"name": ["炫动少儿", "炫动卡通"]},
+      {"name": ["嘉佳少儿", "嘉佳卡通"]},
+      {"name": ["优漫少儿", "优漫卡通"]}
+    ]
+  },
   "provincial_satellite_channel": {
-    "huabei_region": [
-      {"name": ["北京卫视"]},
-      {"name": ["天津卫视"]},
-      {"name": ["河北卫视"]},
-      {"name": ["山西卫视"]},
-      {"name": ["内蒙古卫视"]}
-      {"name": ["辽宁卫视"]},
-      {"name": ["吉林卫视"]},
-      {"name": ["黑龙江卫视"]}
-      {"name": ["上海东方卫视", "东方卫视"]},
-      {"name": ["江苏卫视"]},
-      {"name": ["浙江卫视"]},
-      {"name": ["安徽卫视"]},
-      {"name": ["福建东南卫视", "东南卫视"]},
-      {"name": ["江西卫视"]},
-      {"name": ["山东卫视"]},
-      {"name": ["上海炫动卡通卫视", "炫动卡通卫视"]}
-      {"name": ["河南卫视"]},
-      {"name": ["湖北卫视"]},
-      {"name": ["湖南卫视"]},
-      {"name": ["广东卫视"]},
-      {"name": ["广东南方卫视", "南方卫视"]},
-      {"name": ["广西卫视"]},
-      {"name": ["海南卫视"]}
-      {"name": ["重庆卫视"]},
-      {"name": ["四川卫视"]},
-      {"name": ["贵州卫视"]},
-      {"name": ["云南卫视", "云南娱乐", "云南都市", "云南音乐广播"]},
-      {"name": ["西藏卫视"]}
-      {"name": ["陕西卫视"]},
-      {"name": ["甘肃卫视"]},
-      {"name": ["青海卫视"]},
-      {"name": ["宁夏卫视"]},
-      {"name": ["新疆卫视"]},
-      {"name": ["新疆生产建设兵团卫视", "兵团卫视"]}
+    "all_provinces": [
+      {"name": ["北京卫视"]}, {"name": ["天津卫视"]}, {"name": ["河北卫视"]},
+      {"name": ["山西卫视"]}, {"name": ["内蒙古卫视"]}, {"name": ["辽宁卫视"]},
+      {"name": ["吉林卫视"]}, {"name": ["黑龙江卫视"]}, {"name": ["东方卫视", "上海东方卫视"]},
+      {"name": ["江苏卫视"]}, {"name": ["浙江卫视"]}, {"name": ["安徽卫视"]},
+      {"name": ["东南卫视", "福建东南卫视"]}, {"name": ["江西卫视"]}, {"name": ["山东卫视"]},
+      {"name": ["河南卫视"]}, {"name": ["湖北卫视"]}, {"name": ["湖南卫视"]},
+      {"name": ["广东卫视"]}, {"name": ["南方卫视", "广东南方卫视"]}, {"name": ["广西卫视"]},
+      {"name": ["海南卫视"]}, {"name": ["重庆卫视"]}, {"name": ["四川卫视"]},
+      {"name": ["贵州卫视"]}, {"name": ["云南卫视"]}, {"name": ["西藏卫视"]},
+      {"name": ["陕西卫视"]}, {"name": ["甘肃卫视"]}, {"name": ["青海卫视"]},
+      {"name": ["宁夏卫视"]}, {"name": ["新疆卫视"]}, {"name": ["兵团卫视", "新疆生产建设兵团卫视"]}
     ],
-    "characteristic_city_channel": [
-      {"name": ["凤凰电影"]},
-      {"name": ["CHC动作电影"]}
-      {"name": ["CHC家庭影院"]}
-      {"name": ["CHC影迷电影"]}
-      {"name": ["美亚电影"]}
-      {"name": ["好莱坞电影"]}
-      {"name": ["东森电影"]}
-      {"name": ["邵氏影院"]}
-      {"name": ["美亚电影台"]}
-      {"name": ["美亚电影"]}
-      {"name": ["凤凰电影"]}
+    "movie_channels": [
+      {"name": ["凤凰电影"]}, {"name": ["CHC动作电影"]}, {"name": ["CHC家庭影院"]},
+      {"name": ["CHC影迷电影"]}, {"name": ["美亚电影"]}, {"name": ["好莱坞电影"]},
+      {"name": ["东森电影"]}, {"name": ["邵氏影院"]}
     ],
     "gangtai_region": [
-      {"name": ["TVB1", "TVB翡翠", "TVB明珠"]},
-      {"name": ["凤凰香港"]}
-      {"name": ["星空卫视"]}
-      {"name": ["天映经典"]}
-      {"name": ["天映频道"]}
-      {"name": ["凤凰资讯"]}
-      {"name": ["凤凰中文"]}
-    ],
-  },
-
+      {"name": ["TVB翡翠", "TVB明珠", "TVB1"]},
+      {"name": ["凤凰香港"]}, {"name": ["星空卫视"]}, {"name": ["天映经典"]},
+      {"name": ["天映频道"]}, {"name": ["凤凰资讯"]}, {"name": ["凤凰中文"]}
+    ]
+  }
 }
-
-
-
