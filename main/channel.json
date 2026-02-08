@@ -9,6 +9,8 @@
     {"id": 7, "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Guovin/iptv-api/gd/output/result.m3u"},
     {"id": 8, "url": "https://d.h6room.com/frjzb.txt"},
     {"id": 9, "url": "https://live.zbds.top/tv/iptv4.txt"}
+    {"id": 10, "url": "https://raw.githubusercontent.com/wujiangliu/live-sources/refs/heads/main/dianshijia_10.1.txt"}
+    {"id": 11, "url": "https://raw.githubusercontent.com/wujiangliu/live-sources/refs/heads/main/%E5%86%B0%E8%8C%B6%E5%8E%BB%E4%BD%93%E8%82%B2%E5%8E%BB%E6%8E%A8%E5%B9%BF.m3u"}
   ],
     "cctv_channels": {
     "free_terrestrial_channel": [
@@ -88,8 +90,18 @@
       {"name": ["新疆生产建设兵团卫视", "兵团卫视"]}
     ],
     "characteristic_city_channel": [
-      {"name": ["深圳卫视"]},
-      {"name": ["厦门卫视"]}
+      {"name": ["凤凰电影"]},
+      {"name": ["CHC动作电影"]}
+      {"name": ["CHC家庭影院"]}
+      {"name": ["CHC影迷电影"]}
+      {"name": ["美亚电影"]}
+      {"name": ["好莱坞电影"]}
+      {"name": ["东森电影"]}
+    ]
+    "gangtai_region": [
+      {"name": ["TVB1"], "TVB翡翠"], "TVB明珠"]},
+      {"name": ["凤凰香港"]}
+      {"name": ["星空卫视"]}
     ]
   },
   "digital_paid_channel": [
@@ -104,4 +116,5 @@
     {"name": ["CCTV第一剧场"]},
     {"name": ["CCTV央视文化精品"]}
   ]
+
 }
