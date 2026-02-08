@@ -1,6 +1,6 @@
 {
   "subscription_urls": [
-    {"id": 1, "url": "https://txt.gt.tc/users/HKTV.txt"},
+    {"id": 1, "url": "https://raw.githubusercontent.com/cymz6/AutoIPTV-Hotel/refs/heads/main/lives.m3u"},
     {"id": 2, "url": "https://tmxk.pp.ua/smart-cn.m3u"},
     {"id": 3, "url": "https://tmxk.pp.ua/4gtv-cn.m3u"},
     {"id": 4, "url": "https://gh-proxy.com/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt"},
@@ -8,9 +8,13 @@
     {"id": 6, "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Guovin/iptv-api/gd/output/result.txt"},
     {"id": 7, "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Guovin/iptv-api/gd/output/result.m3u"},
     {"id": 8, "url": "https://d.h6room.com/frjzb.txt"},
-    {"id": 9, "url": "https://live.zbds.top/tv/iptv4.txt"}
-    {"id": 10, "url": "https://raw.githubusercontent.com/wujiangliu/live-sources/refs/heads/main/dianshijia_10.1.txt"}
-    {"id": 11, "url": "https://raw.githubusercontent.com/wujiangliu/live-sources/refs/heads/main/%E5%86%B0%E8%8C%B6%E5%8E%BB%E4%BD%93%E8%82%B2%E5%8E%BB%E6%8E%A8%E5%B9%BF.m3u"}
+    {"id": 9, "url": "https://live.zbds.top/tv/iptv4.txt"},
+    {"id": 10, "url": "https://raw.githubusercontent.com/YueChan/Live/refs/heads/main/GNTV.m3u"},
+    {"id": 8, "url": "https://raw.githubusercontent.com/skddyj/iptv/refs/heads/main/IPTV.m3u"},
+    {"id": 8, "url": "https://live.zbds.top/tv/iptv6.m3u"},
+    {"id": 8, "url": "https://raw.githubusercontent.com/iptv-org/iptv/refs/heads/master/streams/tw.m3u"},
+    {"id": 8, "url": "https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv4.m3u"},
+    {"id": 8, "url": "https://raw.githubusercontent.com/suxuang/myIPTV/refs/heads/main/ipv6.m3u"},
   ],
     "cctv_channels": {
     "free_terrestrial_channel": [
@@ -40,8 +44,8 @@
       {"name": ["炫动卡通", "炫动少儿"]},
       {"name": ["嘉佳卡通", "嘉佳少儿"]},
       {"name": ["优漫卡通", "优漫少儿"]}
-    ]
-  },
+    ],
+  }, 
   "provincial_satellite_channel": {
     "huabei_region": [
       {"name": ["北京卫视"]},
@@ -49,13 +53,9 @@
       {"name": ["河北卫视"]},
       {"name": ["山西卫视"]},
       {"name": ["内蒙古卫视"]}
-    ],
-    "dongbei_region": [
       {"name": ["辽宁卫视"]},
       {"name": ["吉林卫视"]},
       {"name": ["黑龙江卫视"]}
-    ],
-    "huadong_region": [
       {"name": ["上海东方卫视", "东方卫视"]},
       {"name": ["江苏卫视"]},
       {"name": ["浙江卫视"]},
@@ -64,8 +64,6 @@
       {"name": ["江西卫视"]},
       {"name": ["山东卫视"]},
       {"name": ["上海炫动卡通卫视", "炫动卡通卫视"]}
-    ],
-    "zhongnan_region": [
       {"name": ["河南卫视"]},
       {"name": ["湖北卫视"]},
       {"name": ["湖南卫视"]},
@@ -73,15 +71,11 @@
       {"name": ["广东南方卫视", "南方卫视"]},
       {"name": ["广西卫视"]},
       {"name": ["海南卫视"]}
-    ],
-    "xinan_region": [
       {"name": ["重庆卫视"]},
       {"name": ["四川卫视"]},
       {"name": ["贵州卫视"]},
-      {"name": ["云南卫视"]},
+      {"name": ["云南卫视", "云南娱乐", "云南都市", "云南音乐广播"]},
       {"name": ["西藏卫视"]}
-    ],
-    "xibei_region": [
       {"name": ["陕西卫视"]},
       {"name": ["甘肃卫视"]},
       {"name": ["青海卫视"]},
@@ -97,25 +91,22 @@
       {"name": ["美亚电影"]}
       {"name": ["好莱坞电影"]}
       {"name": ["东森电影"]}
-    ]
+      {"name": ["邵氏影院"]}
+      {"name": ["美亚电影台"]}
+      {"name": ["美亚电影"]}
+      {"name": ["凤凰电影"]}
+    ],
     "gangtai_region": [
       {"name": ["TVB1", "TVB翡翠", "TVB明珠"]},
       {"name": ["凤凰香港"]}
       {"name": ["星空卫视"]}
-    ]
+      {"name": ["天映经典"]}
+      {"name": ["天映频道"]}
+      {"name": ["凤凰资讯"]}
+      {"name": ["凤凰中文"]}
+    ],
   },
-  "digital_paid_channel": [
-    {"name": ["CCTV风云足球"]},
-    {"name": ["CCTV风云音乐"]},
-    {"name": ["CCTV怀旧剧场"]},
-    {"name": ["CCTV女性时尚"]},
-    {"name": ["CCTV兵器科技"]},
-    {"name": ["CCTV老故事"]},
-    {"name": ["CCTV发现之旅"]},
-    {"name": ["CCTV世界地理"]},
-    {"name": ["CCTV第一剧场"]},
-    {"name": ["CCTV央视文化精品"]}
-  ]
 
 }
+
 
